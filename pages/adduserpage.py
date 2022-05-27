@@ -1,7 +1,8 @@
-from playwright.async_api import Page
 """
 用户管理>新增用户
 """
+from playwright.async_api import Page
+
 
 class AddUser:
     def __init__(self,page:Page):

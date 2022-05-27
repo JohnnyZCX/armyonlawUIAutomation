@@ -36,6 +36,45 @@ def test_questionnaire_investigate(page:Page):
     questionnaireListPage.search_button.click()
     questionnaireListPage.assertText("//span[@class=\"el-pagination__total\"]","共 0 条")
     questionnaireListPage.add_questionnaire_button.click()
+    addQuestionnairePage.title_input.fill("擎盾大学问卷（一）")
+    addQuestionnairePage.subhead_input.fill("这是综合知识测试题，如感兴趣请抽出5分钟时间参与回答！")
+    addQuestionnairePage.single_choice_button.click()
+    addQuestionnairePage.first_question_title_input.fill("香港与祖国内地的主要联系铁路是：")
+    addQuestionnairePage.first_question_option1_input.fill("京沪线")
+    addQuestionnairePage.first_question_option2_input.fill("京广线")
+    addQuestionnairePage.first_question_add_option.click()
+    addQuestionnairePage.first_question_option3_input.fill("京九线")
+    addQuestionnairePage.first_question_add_option.click()
+    addQuestionnairePage.first_question_option4_input.fill("广深线")
+    addQuestionnairePage.multiple_choice_button.click()
+    addQuestionnairePage.second_question_title_input.fill("我国四大发明有哪些？")
+    addQuestionnairePage.second_question_option1_input.fill("造纸术")
+    addQuestionnairePage.second_question_option2_input.fill("炼丹炉")
+    addQuestionnairePage.second_question_add_option.click()
+    addQuestionnairePage.second_question_option3_input.fill("火药")
+    addQuestionnairePage.second_question_add_option.click()
+    addQuestionnairePage.second_question_option4_input.fill("印刷术")
+    addQuestionnairePage.second_question_add_option.click()
+    addQuestionnairePage.second_question_option5_input.fill("指南针")
+    addQuestionnairePage.picture_choice_button.click()
+    addQuestionnairePage.third_question_title_input.fill("请选择以下包含军人的图片：")
+    addQuestionnairePage.third_question_delete_button.click()
+    addQuestionnairePage.dialog_confirm_button.click()
+
+    addQuestionnairePage.save_as_template_button.click()
+    questionnaireListPage.title_search_input.fill("擎盾大学问卷（一）")
+    questionnaireListPage.search_button.click()
+    questionnaireListPage.template_questionnaire_button.click()
+    questionnaireListPage.find_hidden_element("//*[@id=\"app\"]/section/div/section/main/div[2]/div/div[2]/div[3]/div[3]/div/div[2]","//*[@id=\"app\"]/section/div/section/main/div[2]/div/div[2]/div[3]/div[2]/div/div[2]/div[2]/p[4]")
+    questionnaireListPage.dialog_confirm_button.click()
+    questionnaireListPage.assertText("//div[@role=\"alert\"]/p[@class=\"el-message__content\"]","删除成功")
+
+
+
+
+
+
+
 
 
 

@@ -23,7 +23,15 @@ class AddQuestionnaire:
         self.first_question_option2_input = self.page.locator("//div[@class=\"choice-question-item\"][1]//div[@class=\"radio-box\"]/div[2]//input")
         self.first_question_add_option = self.page.locator("//div[@class=\"choice-question-item\"][1]//div[@class=\"radio-item-add\"]")
         self.first_question_option3_input = self.page.locator("//div[@class=\"choice-question-item\"][1]//div[@class=\"radio-box\"]/div[3]//input")
-        self.second_question_delete_button = self.page.locator("//div[@class=\"choice-question-item\"][2]/div[@class=\"operation\"]/div[@class=\"drag del\"]")
+        self.first_question_option4_input = self.page.locator("//div[@class=\"choice-question-item\"][1]//div[@class=\"radio-box\"]/div[4]//input")
+        self.second_question_option1_input = self.page.locator("//div[@class=\"choice-question-item\"][2]//div[@class=\"radio-box\"]/div[1]//input")
+        self.second_question_option2_input = self.page.locator("//div[@class=\"choice-question-item\"][2]//div[@class=\"radio-box\"]/div[2]//input")
+        self.second_question_option3_input = self.page.locator("//div[@class=\"choice-question-item\"][2]//div[@class=\"radio-box\"]/div[3]//input")
+        self.second_question_option4_input = self.page.locator("//div[@class=\"choice-question-item\"][2]//div[@class=\"radio-box\"]/div[4]//input")
+        self.second_question_option5_input = self.page.locator("//div[@class=\"choice-question-item\"][2]//div[@class=\"radio-box\"]/div[5]//input")
+        self.second_question_add_option = self.page.locator("//div[@class=\"choice-question-item\"][2]//div[@class=\"radio-item-add\"]")
+        self.third_question_delete_button = self.page.locator("//div[@class=\"choice-question-item\"][3]/div[@class=\"operation\"]/div[@class=\"drag del\"]")
+        self.dialog_confirm_button = self.page.locator("//div[@class=\"el-message-box__btns\"]/button[2]")
 
     def assertVisible(self,element):
         visible = self.page.is_visible(element)

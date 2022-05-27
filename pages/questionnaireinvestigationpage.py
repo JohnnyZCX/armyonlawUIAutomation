@@ -11,9 +11,11 @@ class QuestionnaireInvestigation:
         self.date_table_end_date = self.page.locator("//div[@class=\"el-picker-panel__content el-date-range-picker__content is-right\"]//tr[4]//td[@class=\"available\"][1]")
         self.search_button = self.page.locator("//div[@class=\"el-form-item__content\"]/button[1]") #查询按钮
         self.all_questionnaire_button = self.page.locator("//div[@class=\"el-button-group\"]/button[1]") #全部问卷tab
-        self.template_questionnaire_button = self.page.locator("//div[@class=\"el-button-group\"]/button[2]") #模板文件tab
+        self.template_questionnaire_button = self.page.locator("//div[@class=\"el-button-group\"]/button[2]") #模板问卷tab
         self.published_questionnaire_button = self.page.locator("//div[@class=\"el-button-group\"]/button[2]") #发布问卷tab
         self.add_questionnaire_button = self.page.locator("//div[@class=\"questionnaire-list\"]//div[@class=\"add-questionnaire\"]") #新增问卷按钮
+        self.dialog_confirm_button = self.page.locator("button:has-text(\"确 定\")")
+        self.delete_success_alert = self.page.locator("//div[@role=\"alert\"]/p[@class=\"el-message__content\"]") #删除问卷成功提示语
 
     def assertVisible(self,element):
         visible = self.page.is_visible(element)
@@ -22,3 +24,7 @@ class QuestionnaireInvestigation:
     def assertText(self,element,text_value):
         text = self.page.inner_text(element)
         assert text ==  text_value
+
+    def find_hidden_element(self,parent_element,child_element):
+        self.page.hover(parent_element)
+        self.page.locator(child_element).click()
