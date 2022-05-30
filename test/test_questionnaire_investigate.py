@@ -66,7 +66,6 @@ def test_questionnaire_investigate(page:Page):
     #questionnaireListPage.date_icon.click()
     #questionnaireListPage.date_table_today.click()
     #questionnaireListPage.date_table_end_date.click()
-    #测试
     questionnaireListPage.search_button.click()
 
     questionnaireListPage.template_questionnaire_button.click()
