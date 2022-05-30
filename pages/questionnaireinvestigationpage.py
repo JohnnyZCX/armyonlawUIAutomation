@@ -15,7 +15,11 @@ class QuestionnaireInvestigation:
         self.published_questionnaire_button = self.page.locator("//div[@class=\"el-button-group\"]/button[2]") #发布问卷tab
         self.add_questionnaire_button = self.page.locator("//div[@class=\"questionnaire-list\"]//div[@class=\"add-questionnaire\"]") #新增问卷按钮
         self.dialog_confirm_button = self.page.locator("button:has-text(\"确 定\")")
+        self.delete_questionnaire_button = self.page.locator("//div[@class=\"questionnaire-bottom\"]//div[@class=\"menu-list\"]/p[4]")
         self.delete_success_alert = self.page.locator("//div[@role=\"alert\"]/p[@class=\"el-message__content\"]") #删除问卷成功提示语
+        #self.edit_questionnaire = self.page.locator("//div[@class=\"questionnaire-item\"][2]//span[@class=\"edit\"]")
+        self.edit_questionnaire = self.page.locator("text=编辑")
+        self.publish_questionnaire = self.page.locator("//div[@class=\"questionnaire-item\"][2]//span[@class=\"release\"]")
 
     def assertVisible(self,element):
         visible = self.page.is_visible(element)
@@ -25,6 +29,6 @@ class QuestionnaireInvestigation:
         text = self.page.inner_text(element)
         assert text ==  text_value
 
-    def find_hidden_element(self,parent_element,child_element):
+    def find_hidden_element(self,parent_element):
         self.page.hover(parent_element)
-        self.page.locator(child_element).click()
+        #self.page.locator(child_element).click()

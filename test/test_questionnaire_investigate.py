@@ -63,11 +63,16 @@ def test_questionnaire_investigate(page:Page):
 
     addQuestionnairePage.save_as_template_button.click()
     questionnaireListPage.title_search_input.fill("擎盾大学问卷（一）")
+    #questionnaireListPage.date_icon.click()
+    #questionnaireListPage.date_table_today.click()
+    #questionnaireListPage.date_table_end_date.click()
     questionnaireListPage.search_button.click()
+
     questionnaireListPage.template_questionnaire_button.click()
-    questionnaireListPage.find_hidden_element("//*[@id=\"app\"]/section/div/section/main/div[2]/div/div[2]/div[3]/div[3]/div/div[2]","//*[@id=\"app\"]/section/div/section/main/div[2]/div/div[2]/div[3]/div[2]/div/div[2]/div[2]/p[4]")
-    questionnaireListPage.dialog_confirm_button.click()
-    questionnaireListPage.assertText("//div[@role=\"alert\"]/p[@class=\"el-message__content\"]","删除成功")
+    questionnaireListPage.assertText("//span[@class=\"el-pagination__total\"]", "共 1 条")
+
+
+
 
 
 
