@@ -5,4 +5,7 @@
     <orderEntry type="jdk" jdkName="Python 3.7 (armyonlaw) (2)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="pytest" />
+  </component>
 </module>
