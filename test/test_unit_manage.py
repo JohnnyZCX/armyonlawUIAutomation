@@ -1,7 +1,10 @@
 """测试机构切换/机构管理菜单/机构管理页面校验"""
+#-*- coding: utf-8 -*-
+
 import pytest
 from playwright.async_api import Page
 
+from common.handle_logging import test_log
 from pages.loginpage import LoginPage
 from pages.unitmanagepage import UnitManage
 from pages.usermanagementpage import UserManagement
@@ -25,13 +28,28 @@ def test_unit_manage(page:Page):
     userManagementPage.unit_manage_menu.click()
     unitManagePage = UnitManage(page)
     unitManagePage.assertVisible("th:has-text(\"单位编号\")")
-    unitManagePage.new_unit_button.click()
-    unitManagePage.assertVisible("label[role=\"radio\"]:has-text(\"新增机构\")")
-    unitManagePage.assertVisible("label[role=\"radio\"]:has-text(\"新增机器人\")")
-    unitManagePage.dialog_cancel_button.click()
-    unitManagePage.edit_unit_button.click()
-    unitManagePage.assertVisible("label[role=\"radio\"]:has-text(\"编辑机构\")")
-    unitManagePage.dialog_confirm_button.click()
-    unitManagePage.assertVisible("//div[@role=\"alert\"]/p[@class=\"el-message__content\"]") #校验更新成功提示语是否可见
+    try:
+        unitManagePage.new_unit_button.click()
+        unitManagePage.assertVisible("label[role=\"radio\"]:has-text(\"新增机构\")")
+        unitManagePage.assertVisible("label[role=\"radio\"]:has-text(\"新增机器人\")")
+        unitManagePage.dialog_cancel_button.click()
+    except Exception as e:
+        test_log.error('新增机构测试不通过')
+        test_log.debug('点击新增按钮会出现新增机构和新增机器人弹窗')
+        test_log.exception(e)
+    else:
+        test_log.info("新增机构测试通过")
+
+    try:
+        unitManagePage.edit_unit_button.click()
+        unitManagePage.assertVisible("label[role=\"radio\"]:has-text(\"编辑机构\")")
+        unitManagePage.dialog_confirm_button.click()
+        unitManagePage.assertVisible("//div[@role=\"alert\"]/p[@class=\"el-message__content\"]") #校验更新成功提示语是否可见
+    except Exception as e:
+        test_log.error('编辑机构测试不通过')
+        test_log.debug('编辑已存在的机构后点击确定会提示更新成功')
+        test_log.exception(e)
+    else:
+        test_log.info("编辑机构测试通过")
 
 

@@ -11,7 +11,7 @@ class AddQuestionnaire:
         self.fill_blank_button = self.page.locator("//div[@class=\"question-type\"]/div[4]") #填空题
         self.title_input = self.page.locator("//textarea[@placeholder=\"示例问卷标题\"]") #问卷标题
         self.subhead_input = self.page.locator("//div[@class=\"questionnaire-description el-textarea el-input--medium\"]/textarea") #问卷副标题
-        self.cancel_button = self.page.locator("//div[@class=\"btn-box\"]/button[1]")
+        self.cancel_button = self.page.locator("//div[@class=\"btn-box\"]/button[1]") #取消按钮
         self.save_as_template_button = self.page.locator("//div[@class=\"btn-box\"]/button[2]")
         self.preview_button = self.page.locator("//div[@class=\"btn-box\"]/button[3]")
         self.publish_button = self.page.locator("//div[@class=\"btn-box\"]/button[4]")

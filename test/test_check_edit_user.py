@@ -31,11 +31,9 @@ def test_check_edit_user(page: Page):
     #userManagementPage.assertVisible("div[role=\"alert\"]:has-text(\"保存成功！\")")
     try:
         userManagementPage.save_success_alert.wait_for() #等待跳转页面上提示保存成功
+        test_log.info('用例查看和编辑用户通过')
     except Exception as e:
         test_log.error('用例查看和编辑用户不通过')
         test_log.debug('预期结果：保存成功并弹出提示语句')
         test_log.exception(e)
-    else:
-        test_log.info('用例查看和编辑用户通过')
-
 

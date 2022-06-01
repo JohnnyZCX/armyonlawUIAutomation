@@ -1,3 +1,5 @@
+import time
+
 from playwright.async_api import Page
 
 from common.handle_logging import test_log
@@ -62,39 +64,55 @@ def test_questionnaire_investigate(page:Page):
     addQuestionnairePage.third_question_delete_button.click()
     addQuestionnairePage.dialog_confirm_button.click()
 
-    addQuestionnairePage.publish_button.click()
+    addQuestionnairePage.save_as_template_button.click()
     questionnaireListPage.title_search_input.fill("擎盾大学问卷（一）")
-    questionnaireListPage.date_icon.click()
-    questionnaireListPage.date_table_today.click()
-    questionnaireListPage.date_table_end_date.click()
     questionnaireListPage.search_button.click()
 
-    questionnaireListPage.published_questionnaire_button.click()
+    questionnaireListPage.template_questionnaire_button.click()
     try:
         questionnaireListPage.assertText("//span[@class=\"el-pagination__total\"]", "共 1 条")
+        test_log.info('问卷列表查询测试通过')
     except AssertionError as e:
         test_log.error('问卷查询列表显示的问卷数量不通过')
         test_log.debug('预期结果：页面上查询出一条问卷数据')
         test_log.exception(e)
 
-    else:
-        test_log.info('问卷列表查询测试通过')
+    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
+    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"edit\"]").click()
+    addQuestionnairePage.cancel_button.click()
+    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
+    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"release\"]").click()
+    questionnaireListPage.dialog_confirm_button.click()
+    questionnaireListPage.title_search_input.fill("擎盾大学问卷（一）")
+    questionnaireListPage.date_icon.click()
+    questionnaireListPage.date_table_today.click()
+    questionnaireListPage.date_table_end_date.click()
+    questionnaireListPage.search_button.click()
+    questionnaireListPage.published_questionnaire_button.click()
+    try:
+        questionnaireListPage.assertText("//span[@class=\"el-pagination__total\"]", "共 1 条")
+        test_log.info('发布问卷测试通过')
+    except AssertionError as e:
+        test_log.error('问卷查询列表显示的发布问卷数量不通过')
+        test_log.debug('预期结果：页面上查询出一条问卷数据')
+        test_log.exception(e)
+
 
 
     #eles=page.query_selector_all('.questionnaire-box div:nth-child(2)')
     #print("4.---->",eles, len(eles))
     #eles[-1].hover(timeout=3000,force=True)
     try:
+        time.sleep(2)
         questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000,force=True)
-        questionnaireListPage.page.locator("//p[text()=\"删除项目\"]").click()
+        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//p[4]").click() #//p[text()=\"删除项目\"]
         questionnaireListPage.dialog_confirm_button.click()
         questionnaireListPage.delete_success_alert.wait_for()
+        test_log.info('问卷创建和删除测试通过')
     except Exception as e:
         test_log.error('问卷删除测试不通过')
         test_log.debug('预期结果：问卷删除成功并出现提示语句')
         test_log.exception(e)
-    else:
-        test_log.info('问卷创建和删除测试通过')
 
 
 
