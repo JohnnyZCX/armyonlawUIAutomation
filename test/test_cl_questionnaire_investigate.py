@@ -5,6 +5,7 @@ from playwright.async_api import Page
 from common.handle_logging import test_log
 from pages.addquestionnairepage import AddQuestionnaire
 from pages.loginpage import LoginPage
+from pages.questionnairedatapage import QuestionnaireData
 from pages.questionnaireinvestigationpage import QuestionnaireInvestigation
 from pages.usermanagementpage import UserManagement
 
@@ -78,10 +79,11 @@ def test_questionnaire_investigate(page:Page):
         test_log.exception(e)
 
     questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
-    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"edit\"]").click()
+    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"edit\"]").click() #点击编辑
     addQuestionnairePage.cancel_button.click()
+    time.sleep(1)
     questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
-    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"release\"]").click()
+    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"release\"]").click() #点击发布
     questionnaireListPage.dialog_confirm_button.click()
     questionnaireListPage.title_search_input.fill("擎盾大学问卷（一）")
     questionnaireListPage.date_icon.click()
@@ -97,17 +99,42 @@ def test_questionnaire_investigate(page:Page):
         test_log.debug('预期结果：页面上查询出一条问卷数据')
         test_log.exception(e)
 
+    try:
+        time.sleep(1)
+        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
+        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"data\"]").click() #点击数据按钮
+        questionnaireDataPage = QuestionnaireData(page)
+        questionnaireDataPage.assertText("//h1[@class=\"title\"]","擎盾大学问卷（一）")
+        test_log.info("点击数据按钮跳转问卷数据页面测试通过")
+    except Exception as e:
+        test_log.error("点击数据按钮跳转问卷数据页面测试不通过")
+        test_log.debug("预期结果：点击问卷底部数据按钮能跳转问卷数据统计页面")
+        test_log.exception(e)
+    questionnaireDataPage.back_button.click()
 
+    try:
+        time.sleep(1)
+        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
+        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"recommend\"]").click() #设为推荐
+
+        questionnaireListPage.operate_success_alert.wait_for()
+        test_log.info('问卷设置推荐测试通过')
+    except Exception as e:
+        test_log.error('问卷设置推荐测试不通过')
+        test_log.debug("预期结果：点击设置推荐能设置成功")
+        test_log.exception(e)
 
     #eles=page.query_selector_all('.questionnaire-box div:nth-child(2)')
     #print("4.---->",eles, len(eles))
     #eles[-1].hover(timeout=3000,force=True)
+    questionnaireListPage.title_search_input.fill("擎盾大学问卷（一）")
+    questionnaireListPage.search_button.click()
     try:
-        time.sleep(2)
+        time.sleep(1)
         questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000,force=True)
         questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//p[4]").click() #//p[text()=\"删除项目\"]
         questionnaireListPage.dialog_confirm_button.click()
-        questionnaireListPage.delete_success_alert.wait_for()
+        questionnaireListPage.operate_success_alert.wait_for()
         test_log.info('问卷创建和删除测试通过')
     except Exception as e:
         test_log.error('问卷删除测试不通过')

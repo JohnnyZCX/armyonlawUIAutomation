@@ -8,6 +8,9 @@ class UserManagement:
     def __init__(self,page:Page):
         self.page = page
         self.global_configuration = self.page.locator("ul[role=\"menubar\"] div:has-text(\"全局配置\")")
+        self.logging_menu = self.page.locator("//ul[@role=\"menu\"]//i[@class=\"el-submenu__icon-arrow el-icon-arrow-down\"]") #日志记录菜单
+        self.robot_log_menu = self.page.locator("//ul[@role=\"menu\"]/li[4]/ul[@role=\"menu\"]/li") #机器人日志菜单
+        self.cms_log_menu = self.page.locator("//ul[@role=\"menu\"]/li[4]/ul[@role=\"menu\"]/li[3]") #后台日志菜单
         self.unit_manage_menu = self.page.locator("text=机构管理") #机构管理菜单
         self.questionnaire_manage_menu = self.page.locator("//*[@id=\"app\"]/section/div/section/aside/ul/li[1]/ul/li[3]") #问卷调查管理菜单
         self.switch_institution = self.page.locator("//*[@id=\"app\"]/section/header/div/div[2]/div[1]/div/div[1]/input")
