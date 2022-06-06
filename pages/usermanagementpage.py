@@ -7,6 +7,7 @@ from playwright.async_api import Page
 class UserManagement:
     def __init__(self,page:Page):
         self.page = page
+        self.logout_button = self.page.locator("//div[@class=\"user-top\"]/img[2]")
         self.global_configuration = self.page.locator("ul[role=\"menubar\"] div:has-text(\"全局配置\")")
         self.logging_menu = self.page.locator("//ul[@role=\"menu\"]//i[@class=\"el-submenu__icon-arrow el-icon-arrow-down\"]") #日志记录菜单
         self.robot_log_menu = self.page.locator("//ul[@role=\"menu\"]/li[4]/ul[@role=\"menu\"]/li") #机器人日志菜单

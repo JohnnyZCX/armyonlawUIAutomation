@@ -6,13 +6,15 @@ from playwright.async_api import Page
 
 from common.handle_logging import test_log
 from pages.adduserpage import AddUser
-from pages.loginpage import LoginPage
 from pages.usermanagementpage import UserManagement
+from test.login_test import login
+import allure
 
-@pytest.mark.add_user
-def test_add_user(page:Page):
-    loginPage = LoginPage(page)
-    loginPage.login("zhengchunxing", "axing_2010")
+
+#@pytest.mark.add_user
+def test_add_user(page:Page,login):
+    #loginPage = LoginPage(page)
+    #loginPage.login("zhengchunxing", "axing_2010")
 
     userManagementPage = UserManagement(page)
     userManagementPage.add_user_button.click()

@@ -9,13 +9,11 @@ from playwright.async_api import Page
 
 from common.handle_logging import test_log
 from pages.cmslogspage import CmsLogs
-from pages.loginpage import LoginPage
+from test.login_test import login
 from pages.usermanagementpage import UserManagement
 
 
-def test_cms_log(page:Page):
-    loginPage = LoginPage(page)
-    loginPage.login("zhengchunxing", "axing_2010")
+def test_cms_log(page:Page,login):
     userManagementPage = UserManagement(page)
     userManagementPage.global_configuration.click() #打开全局配置菜单
     userManagementPage.logging_menu.click() #打开日志记录下拉菜单
