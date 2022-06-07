@@ -1,3 +1,6 @@
+"""
+用户详情页页面封装
+"""
 from playwright.async_api import Page
 
 

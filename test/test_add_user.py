@@ -7,7 +7,7 @@ from playwright.async_api import Page
 from common.handle_logging import test_log
 from pages.adduserpage import AddUser
 from pages.usermanagementpage import UserManagement
-from test.login_test import login
+from test.conftest import login
 import allure
 
 
@@ -16,7 +16,7 @@ def test_add_user(page:Page,login):
     #loginPage = LoginPage(page)
     #loginPage.login("zhengchunxing", "axing_2010")
 
-    userManagementPage = UserManagement(page)
+    userManagementPage = login
     userManagementPage.add_user_button.click()
     addUserPage = AddUser(page)
     try:
@@ -31,7 +31,8 @@ def test_add_user(page:Page,login):
         addUserPage.upload_head_photo.set_input_files("d15a281faa877cfe73f4d1adfcaa7f35.jpeg")
         addUserPage.local_configure_checkbox.click()
         addUserPage.save_button.click()
-        userManagementPage.save_success_alert.wait_for()  # 等待跳转页面上提示保存成功
+        # 等待跳转页面上提示保存成功
+        userManagementPage.save_success_alert.wait_for()
         test_log.info("新增用户测试通过")
     except Exception as e:
         test_log.error("新增用户测试不通过")

@@ -1,17 +1,22 @@
+"""
+问卷调查管理模块新增问卷/保存为模板/编辑问卷/发布问卷
+/设为推荐/查看统计数据/删除问卷等操作
+"""
 import time
 
 from playwright.async_api import Page
 
 from common.handle_logging import test_log
 from pages.addquestionnairepage import AddQuestionnaire
-from test.login_test import login
+from test.conftest import login
 from pages.questionnairedatapage import QuestionnaireData
 from pages.questionnaireinvestigationpage import QuestionnaireInvestigation
 from pages.usermanagementpage import UserManagement
 
 def test_questionnaire_investigate(page:Page,login):
-    userManagementPage = UserManagement(page)
-    userManagementPage.global_configuration.wait_for()  # 等待是否跳转成功
+    userManagementPage = login
+    # 等待是否跳转成功
+    userManagementPage.global_configuration.wait_for()
     userManagementPage.global_configuration.click()
     userManagementPage.questionnaire_manage_menu.click()
     questionnaireListPage = QuestionnaireInvestigation(page)
@@ -76,12 +81,15 @@ def test_questionnaire_investigate(page:Page,login):
         test_log.exception(e)
 
     questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
-    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"edit\"]").click() #点击编辑
+    # 点击编辑
+    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"edit\"]").click()
     addQuestionnairePage.cancel_button.click()
-    time.sleep(1)
+    time.sleep(2)
     questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
-    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"release\"]").click() #点击发布
+    # 点击发布
+    questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"release\"]").click()
     questionnaireListPage.dialog_confirm_button.click()
+    time.sleep(2)
     questionnaireListPage.title_search_input.fill("擎盾大学问卷（一）")
     questionnaireListPage.date_icon.click()
     questionnaireListPage.date_table_today.click()
@@ -97,9 +105,10 @@ def test_questionnaire_investigate(page:Page,login):
         test_log.exception(e)
 
     try:
-        time.sleep(1)
+        time.sleep(2)
         questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
-        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"data\"]").click() #点击数据按钮
+        # 点击数据按钮
+        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"data\"]").click()
         questionnaireDataPage = QuestionnaireData(page)
         questionnaireDataPage.assertText("//h1[@class=\"title\"]","擎盾大学问卷（一）")
         test_log.info("点击数据按钮跳转问卷数据页面测试通过")
@@ -110,9 +119,10 @@ def test_questionnaire_investigate(page:Page,login):
     questionnaireDataPage.back_button.click()
 
     try:
-        time.sleep(1)
+        time.sleep(2)
         questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
-        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"recommend\"]").click() #设为推荐
+        # 设为推荐
+        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//span[@class=\"recommend\"]").click()
 
         questionnaireListPage.operate_success_alert.wait_for()
         test_log.info('问卷设置推荐测试通过')
@@ -127,9 +137,9 @@ def test_questionnaire_investigate(page:Page,login):
     questionnaireListPage.title_search_input.fill("擎盾大学问卷（一）")
     questionnaireListPage.search_button.click()
     try:
-        time.sleep(1)
+        time.sleep(2)
         questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000,force=True)
-        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//p[4]").click() #//p[text()=\"删除项目\"]
+        questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//p[4]").click()
         questionnaireListPage.dialog_confirm_button.click()
         questionnaireListPage.operate_success_alert.wait_for()
         test_log.info('问卷创建和删除测试通过')

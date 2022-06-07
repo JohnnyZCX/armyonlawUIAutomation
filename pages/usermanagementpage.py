@@ -30,6 +30,7 @@ class UserManagement:
         self.add_user_button = self.page.locator("button:has-text(\"新增\")")
         self.save_success_alert = self.page.locator("div[role=\"alert\"]:has-text(\"保存成功！\")")
         self.delete_confirm_button = self.page.locator("button:has-text(\"确定\")")
+        self.logout_confirm_button = self.page.locator("//div[@class=\"el-message-box\"]/div[@class=\"el-message-box__btns\"]/button[2]")
 
 
     def assertVisible(self,element):

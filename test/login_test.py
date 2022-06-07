@@ -1,6 +1,9 @@
+"""
+
+
+"""
 import pytest
 from playwright.async_api import Page
-from playwright.sync_api import Playwright
 
 from common.handle_logging import test_log
 from pages.loginpage import LoginPage
@@ -26,27 +29,13 @@ def test_login_pass(page: Page):
     try:
         loginPage.login("zhengchunxing","axing_2010")
         userManagementPage = UserManagement(page)
-        userManagementPage.global_configuration.wait_for() #等待是否跳转成功
+        # 等待是否跳转成功
+        userManagementPage.global_configuration.wait_for()
         test_log.info("登录成功测试通过")
     except Exception as e:
         test_log.error("登录成功测试不通过")
         test_log.debug("预期结果：登录成功并跳转")
         test_log.exception(e)
-
-data = [{'userName':"zhengchunxing",'password':"axing_2010"}]
-ids = ['user_login']
-@pytest.fixture(params=data,ids=ids)
-def login(page: Page,request):
-    loginPage = LoginPage(page)
-    loginPage.login(request.param['userName'], request.param['password'])
-    userManagementPage = UserManagement(page)
-    yield
-    userManagementPage.logout_button.click()
-    userManagementPage.delete_confirm_button.click()
-    loginPage.page.context.close()
-    loginPage.page.close()
-    userManagementPage.page.context.close()
-    userManagementPage.page.close()
 
 
 
