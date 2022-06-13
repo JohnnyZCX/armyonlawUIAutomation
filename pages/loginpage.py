@@ -3,6 +3,7 @@
 """
 import pytest
 from playwright.async_api import Page
+from pytest_base_url.plugin import base_url
 
 
 class LoginPage:
@@ -15,7 +16,8 @@ class LoginPage:
     def login(self,userName,password):
         # 页面窗口最大化
         self.page.set_viewport_size({"width": 1920, "height": 1080})
-        self.page.goto("https://t-rulearmylaw.aegis-info.com/login")
+        #self.page.goto("https://t-rulearmylaw.aegis-info.com/login")
+        self.page.goto(str(base_url))
         visible = self.page.is_visible('[placeholder=\"请输入密码\"]')
         assert visible
         self.password_input.fill(password)

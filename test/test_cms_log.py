@@ -15,7 +15,7 @@ from test.conftest import login
 from pages.usermanagementpage import UserManagement
 
 
-def test_cms_log(page:Page,login):
+def test_cms_log(page,login):
     userManagementPage = login
     # 打开全局配置菜单
     userManagementPage.global_configuration.click()
