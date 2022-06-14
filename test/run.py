@@ -8,4 +8,4 @@
 import pytest
 
 if __name__ == "__main__":
-     pytest.main(['-s', '-v', '-q', '--alluredir', './allure_result'])
+     pytest.main(['-s', '-v', '-q', '--alluredir', 'allure_result'])
