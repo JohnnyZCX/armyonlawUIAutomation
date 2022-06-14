@@ -11,4 +11,4 @@ import pytest
 
 if __name__ == "__main__":
      #pytest.main(['-s', '-v', '-q', '--alluredir', 'allure_result'])
-     os.system('pytest -sq --alluredir=./allure-report')
+     os.system('pytest -sq --alluredir=../allure_result')
