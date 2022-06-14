@@ -15,11 +15,14 @@ class RobotLogs:
         self.operation_type_input = self.page.locator("//input[@placeholder=\"请选择\"]")
         #日历图标
         self.date_icon = self.page.locator("//i[@class=\"el-input__icon el-range__icon el-icon-time\"]")
-        # 日期控件今日日期
-        self.date_table_today = self.page.locator("//div[@class=\"el-picker-panel__content el-date-range-picker__content is-left\"]/table[@class=\"el-date-table\"]//td[@class=\"available today\"]")
-        #结束日期元素
-        self.date_table_end_date = self.page.locator("//div[@class=\"el-picker-panel__content el-date-range-picker__content is-right\"]//tr[4]//td[@class=\"available\"][1]")
-        # 日期控件确定按钮
-        self.date_table_confirm_button = self.page.locator("//button[@class=\"el-button el-picker-panel__link-btn el-button--default el-button--mini is-plain\"]")
-
+        # 开始日期输入框
+        self.start_date_input = self.page.locator("//input[@placeholder=\"开始日期\"]") #开始日期输入框
+        #结束日期输入框
+        self.end_date_input = self.page.locator("//input[@placeholder=\"结束日期\"][@class=\"el-range-input\"]")  #结束日期输入框
+        # 操作类型下拉箭头
+        self.operation_type_drop_list = self.page.locator("text=操作类型：注册登录浏览咨询留言检索法规参与问卷调查收藏是否能答复：是否搜索 >> i >> nth=0")
+        # 登录操作类型选项
+        self.login_operation_type = self.page.locator("//li[@class=\"el-select-dropdown__item\"]/span[contains(text(), \'登录\')]")
+        # 搜索按钮
+        self.search_button = self.page.locator("//button[@class=\"el-button el-button--primary el-button--medium index-module_search__Pf4J\"]")
 

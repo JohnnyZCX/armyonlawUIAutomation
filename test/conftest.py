@@ -12,10 +12,12 @@ from pytest_base_url.plugin import base_url
 from pages.loginpage import LoginPage
 from pages.usermanagementpage import UserManagement
 
-data = [{'userName':"zhengchunxing",'password':"axing_2010"},{'userName1':"DoctorZheng",'password1':"123456"}]
-ids = ['user_login','hospital_login']
-@pytest.fixture(params=data,ids=ids)
-def login(page: Page,request):
+data = [{'userName': "zhengchunxing", 'password': "axing_2010"}]
+ids = ['user_login']
+
+
+@pytest.fixture(params=data, ids=ids)
+def login(page: Page, request):
     loginPage = LoginPage(page)
     loginPage.login(request.param['userName'], request.param['password'])
     userManagementPage = UserManagement(page)
@@ -25,15 +27,14 @@ def login(page: Page,request):
     loginPage.page.context.close()
     loginPage.page.close()
 
-@pytest.fixture(params=data)
-def login_hospital(page:Page,request):
+
+@pytest.fixture(params=data, ids=ids)
+def login_hospital(page: Page):
     loginPage = LoginPage(page)
-    loginPage.login(request.param['userName1'],request.param['password1'])
+    loginPage.login("DoctorZheng", "123456")
     userManagementPage = UserManagement(page)
     yield userManagementPage
     userManagementPage.logout_button.click()
     userManagementPage.logout_confirm_button.click()
     loginPage.page.context.close()
     loginPage.page.close()
-
-

@@ -2,6 +2,8 @@
 
 
 """
+import time
+
 import allure
 import pytest
 from playwright.async_api import Page
@@ -25,6 +27,7 @@ class TestLogin():
         loginPage = LoginPage(page)
         try:
             loginPage.login("zhengchunxing_11", "123456")
+            time.sleep(2)
             loginPage.assertVisible('text=登录失败，账户名或密码错误')
             test_log.info("登录失败测试通过")
         except Exception as e:
@@ -51,6 +54,5 @@ class TestLogin():
             test_log.error("登录成功测试不通过")
             test_log.debug("预期结果：登录成功并跳转")
             test_log.exception(e)
-
 
 
