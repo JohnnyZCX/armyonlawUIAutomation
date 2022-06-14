@@ -1,1 +1,0 @@
-{"uuid": "ba2579fc-e11f-4a08-aefb-11bed89c52d5", "children": ["f0816731-31e0-4b32-a27d-1658d88145ff"], "befores": [{"name": "login_hospital", "status": "passed", "start": 1655205430864, "stop": 1655205431273}], "afters": [{"name": "login_hospital::0", "status": "passed", "start": 1655205432255, "stop": 1655205432649}], "start": 1655205430864, "stop": 1655205432649}
