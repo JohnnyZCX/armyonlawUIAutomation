@@ -5,7 +5,10 @@
 # @Email : zhengchunxing@aegis-data.cn
 # @File : run.py
 # @Project : PlaywrightProject
+import os
+
 import pytest
 
 if __name__ == "__main__":
-     pytest.main(['-s', '-v', '-q', '--alluredir', 'allure_result'])
+     #pytest.main(['-s', '-v', '-q', '--alluredir', 'allure_result'])
+     os.system('pytest -sq --alluredir=./allure-report')
