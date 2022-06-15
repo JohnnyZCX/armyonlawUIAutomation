@@ -8,6 +8,7 @@
 import time
 
 import allure
+import pytest
 from playwright.async_api import Page
 
 from common.handle_logging import test_log
@@ -59,6 +60,8 @@ class TestCmsLog():
             cmsLogsPage.assertText("//table[@class=\"el-table__body\"]/tbody/tr/td[7]/div","新增问卷：擎盾大学问卷（一）")
             test_log.info("后台日志测试通过")
         except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error('后台日志测试不通过')
             test_log.debug('预期结果：按照用户+日期+模块名+操作类型能查询出相关日志记录')
             test_log.exception(e)
+            pytest.fail("预期结果：按照用户+日期+模块名+操作类型能查询出相关日志记录")

@@ -5,6 +5,7 @@
 import time
 
 import allure
+import pytest
 from playwright.async_api import Page
 
 from common.handle_logging import test_log
@@ -93,9 +94,11 @@ class TestQuesitionnaireInvestigate():
             questionnaireListPage.assertText("//span[@class=\"el-pagination__total\"]", "共 1 条")
             test_log.info('新增问卷并存为模板测试通过/查询问卷测试通过')
         except AssertionError as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error('问卷查询列表显示的问卷数量不通过')
             test_log.debug('预期结果：页面上查询出一条问卷数据')
             test_log.exception(e)
+            pytest.fail("预期结果：页面上查询出一条问卷数据（问卷标题：擎盾大学问卷（一））")
 
         questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000, force=True)
         # 点击编辑
@@ -117,9 +120,11 @@ class TestQuesitionnaireInvestigate():
             questionnaireListPage.assertText("//span[@class=\"el-pagination__total\"]", "共 1 条")
             test_log.info('发布问卷测试通过')
         except AssertionError as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error('问卷查询列表显示的发布问卷数量不通过')
             test_log.debug('预期结果：页面上查询出一条问卷数据')
             test_log.exception(e)
+            pytest.fail("预期结果：页面上查询出一条问卷数据")
 
         try:
             time.sleep(2)
@@ -132,9 +137,11 @@ class TestQuesitionnaireInvestigate():
             questionnaireDataPage.back_button.click()
             test_log.info("点击数据按钮跳转问卷数据页面测试通过")
         except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error("点击数据按钮跳转问卷数据页面测试不通过")
             test_log.debug("预期结果：点击问卷底部数据按钮能跳转问卷数据统计页面")
             test_log.exception(e)
+            pytest.fail("预期结果：点击问卷底部数据按钮能跳转问卷数据统计页面且问卷标题显示正确")
 
         try:
             time.sleep(2)
@@ -145,9 +152,11 @@ class TestQuesitionnaireInvestigate():
             questionnaireListPage.operate_success_alert.wait_for()
             test_log.info('问卷设置推荐测试通过')
         except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error('问卷设置推荐测试不通过')
             test_log.debug("预期结果：点击设置推荐能设置成功")
             test_log.exception(e)
+            pytest.fail("预期结果：点击设置推荐能设置成功并出现提示语")
 
         #eles=page.query_selector_all('.questionnaire-box div:nth-child(2)')
         #print("4.---->",eles, len(eles))
@@ -162,9 +171,11 @@ class TestQuesitionnaireInvestigate():
             questionnaireListPage.operate_success_alert.wait_for()
             test_log.info('问卷删除测试通过')
         except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error('问卷删除测试不通过')
             test_log.debug('预期结果：问卷删除成功并出现提示语句')
             test_log.exception(e)
+            pytest.fail("预期结果：问卷删除成功并出现提示语句")
 
 
 

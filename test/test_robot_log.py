@@ -8,6 +8,7 @@
 import time
 
 import allure
+import pytest
 
 from common.handle_logging import test_log
 from pages.robotlogspage import RobotLogs
@@ -45,7 +46,9 @@ class TestRobotLog():
             robotLogsPage.assertText("//table[@class=\"el-table__body\"]/tbody/tr/td[2]/div","唐")
             test_log.info("机器人日志查询测试通过")
         except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error('机器人日志查询测试不通过')
             test_log.debug('预期结果：按照用户+日期+机器人+操作类型能查询出相关日志记录')
             test_log.exception(e)
+            pytest.fail("预期结果：按照用户+日期+机器人+操作类型能查询出相关日志记录")
 

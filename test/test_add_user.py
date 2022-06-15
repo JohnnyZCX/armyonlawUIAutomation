@@ -43,9 +43,12 @@ class TestAddUser():
             userManagementPage.save_success_alert.wait_for()
             test_log.info("新增用户测试通过")
         except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error("新增用户测试不通过")
-            test_log.debug("预期结果：新增用户点击保存按钮能保存成功")
+            test_log.debug("预期结果：新增用户点击保存按钮能保存成功并提示保存成功")
             test_log.exception(e)
+            pytest.fail("预期结果：新增用户点击保存按钮能保存成功并提示保存成功")
+
 
     @allure.story("查询并删除用户测试用例")
     @allure.description('''
@@ -66,9 +69,12 @@ class TestAddUser():
             userManagementPage.assertVisible("text=删除成功")
             test_log.info("查询用户并删除用户测试通过")
         except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error("查询用户并删除用户测试不通过")
-            test_log.debug("预期结果：查询用户和删除用户能成功")
+            test_log.debug("预期结果：查询用户和删除用户能成功并提示删除成功")
             test_log.exception(e)
+            pytest.fail("预期结果：查询用户和删除用户能成功并提示删除成功")
+
 
 
 

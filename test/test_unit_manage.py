@@ -3,6 +3,7 @@
 import time
 
 import allure
+import pytest
 from playwright.async_api import Page
 
 from common.handle_logging import test_log
@@ -51,10 +52,11 @@ class TestUnitManage():
             unitManagePage.dialog_cancel_button.click()
             test_log.info("新增机构测试通过")
         except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error('新增机构测试不通过')
             test_log.debug('点击新增按钮会出现新增机构和新增机器人弹窗')
             test_log.exception(e)
-
+            pytest.fail("点击新增按钮会出现新增机构和新增机器人弹窗")
 
         try:
             unitManagePage.edit_unit_button.click()
@@ -65,9 +67,8 @@ class TestUnitManage():
             unitManagePage.assertVisible("//div[@role=\"alert\"]/p[@class=\"el-message__content\"]")
             test_log.info("编辑机构测试通过")
         except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error('编辑机构测试不通过')
             test_log.debug('编辑已存在的机构后点击确定会提示更新成功')
             test_log.exception(e)
-
-
-
+            pytest.fail("编辑已存在的机构后点击确定会提示更新成功")

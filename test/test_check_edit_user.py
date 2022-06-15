@@ -53,7 +53,9 @@ class TestCheckEditUser():
             userManagementPage.save_success_alert.wait_for()
             test_log.info('用例查看和编辑用户通过')
         except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error('用例查看和编辑用户不通过')
             test_log.debug('预期结果：保存成功并弹出提示语句')
             test_log.exception(e)
+            pytest.fail("预期结果：保存成功并弹出提示语句")
 
