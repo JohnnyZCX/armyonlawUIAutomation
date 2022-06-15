@@ -17,3 +17,4 @@ class QuestionnaireData:
     def assertText(self,element,text_value):
         text = self.page.inner_text(element)
         assert text ==  text_value
+

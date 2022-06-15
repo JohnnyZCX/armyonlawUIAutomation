@@ -10,5 +10,5 @@ from subprocess import Popen, PIPE, STDOUT
 import pytest
 
 if __name__ == "__main__":
-     #pytest.main(['-s', '-v', '-q', '--alluredir', 'allure_result'])
-     os.system('pytest -sq --alluredir=../allure_result')
+     pytest.main(['-s', '-v', '-q', '--alluredir', 'allure_result'])
+     #os.system('pytest -sq --alluredir=../allure_result')

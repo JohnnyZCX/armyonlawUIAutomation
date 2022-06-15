@@ -14,6 +14,14 @@ from pages.robotlogspage import RobotLogs
 
 @allure.feature("机器人日志页面")
 class TestRobotLog():
+    @allure.story("机器人日志按条件查询并验证查询结果的用例")
+    @allure.description('''
+        1.登录成功后校验全局配置菜单是否可见
+        2.在左侧导航栏中点击“全局配置>日志记录>机器人日志”打开机器人日志管理页面，并校验指定元素是否可见
+        2.输入操作用户“唐”
+        3.打开操作类型下拉列表选择”登录“，点击搜索按钮
+        4.在查询结果列表中校验操作类型栏文本值和操作用户栏文本值，并输出测试通过或不通过日志
+        ''')
     def test_robot_log(self,page,login_hospital):
         userManagementPage = login_hospital
         # 打开全局配置菜单
@@ -32,6 +40,9 @@ class TestRobotLog():
             robotLogsPage.operation_type_drop_list.click()
             robotLogsPage.login_operation_type.click()
             robotLogsPage.search_button.click()
+            time.sleep(1)
+            robotLogsPage.assertText("//table[@class=\"el-table__body\"]/tbody/tr/td[5]/div","登录")
+            robotLogsPage.assertText("//table[@class=\"el-table__body\"]/tbody/tr/td[2]/div","唐")
             test_log.info("机器人日志查询测试通过")
         except Exception as e:
             test_log.error('机器人日志查询测试不通过')

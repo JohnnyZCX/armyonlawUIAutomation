@@ -15,6 +15,11 @@ import allure
 @allure.feature("新增用户页面")
 class TestAddUser():
     #@pytest.mark.add_user
+    @allure.story("新增用户测试用例")
+    @allure.description('''
+        1.点击新增按钮进入添加用户页
+        2.在添加用户页面输入个人信息，添加权限配置，后点击保存，验证是否提示保存成功
+        ''')
     def test_add_user(self,page:Page,login):
         #loginPage = LoginPage(page)
         #loginPage.login("zhengchunxing", "axing_2010")
@@ -42,6 +47,15 @@ class TestAddUser():
             test_log.debug("预期结果：新增用户点击保存按钮能保存成功")
             test_log.exception(e)
 
+    @allure.story("查询并删除用户测试用例")
+    @allure.description('''
+            1.在用户管理列表页输入账号查询条件
+            2.点击【查询】按钮
+            3.在查询结果列表中点击删除按钮
+            4.在确认删除提示框中点击【确定】，查验是否提示删除成功
+            ''')
+    def delete_user(self,page:Page,login):
+        userManagementPage = login
         #查询并删除该用户
         try:
             userManagementPage.account_input.fill("zhangtiandi")

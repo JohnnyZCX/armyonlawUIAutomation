@@ -15,6 +15,21 @@ from pages.questionnaireinvestigationpage import QuestionnaireInvestigation
 from pages.usermanagementpage import UserManagement
 @allure.feature("问卷调查管理页面")
 class TestQuesitionnaireInvestigate():
+    @allure.story("新增问卷/问卷保存为模板/查询问卷/编辑和发布问卷/设置推荐/查看统计数据/删除问卷的用例")
+    @allure.description('''
+        1.登录后校验全局配置菜单是否可见
+        2.点击左侧导航栏菜单“全局配置>问卷调查管理”打开问卷调查管理页，并校验指定元素是否可见
+        3.问卷管理列表中点击新增问卷按钮进入创建问卷页面，并校验指定元素是否可见
+        4.分别添加单选题/多选题/图片选择题和填空题，依次为题目添加选项
+        5.题目添加完成后点击【存为模板】按钮
+        6.在问卷调查管理页中输入问卷调查标题并点击查询按钮校验查询结果条数是否正确
+        7.点击编辑操作，后在编辑问卷页点击取消按钮
+        8.在问卷列表上点击发布操作，确认是否发布提示中点击【确定】按钮
+        9.按照问卷调查标题，问卷发布日期和已发布状态查询问卷，并校验查询结果条数是否1条
+        10.在问卷上点击数据按钮跳转问卷数据统计页面并校验问卷标题是否正确
+        11.在问卷上点击设为推荐并校验是否出现推荐成功的提示语
+        12.在问卷上点击删除项目，在确认删除提示中点击确定，后校验删除成功提示语
+        ''')
     def test_questionnaire_investigate(self,page:Page,login):
         userManagementPage = login
         # 等待是否跳转成功
@@ -76,7 +91,7 @@ class TestQuesitionnaireInvestigate():
         questionnaireListPage.template_questionnaire_button.click()
         try:
             questionnaireListPage.assertText("//span[@class=\"el-pagination__total\"]", "共 1 条")
-            test_log.info('问卷列表查询测试通过')
+            test_log.info('新增问卷并存为模板测试通过/查询问卷测试通过')
         except AssertionError as e:
             test_log.error('问卷查询列表显示的问卷数量不通过')
             test_log.debug('预期结果：页面上查询出一条问卷数据')
@@ -145,7 +160,7 @@ class TestQuesitionnaireInvestigate():
             questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//p[4]").click()
             questionnaireListPage.dialog_confirm_button.click()
             questionnaireListPage.operate_success_alert.wait_for()
-            test_log.info('问卷创建和删除测试通过')
+            test_log.info('问卷删除测试通过')
         except Exception as e:
             test_log.error('问卷删除测试不通过')
             test_log.debug('预期结果：问卷删除成功并出现提示语句')

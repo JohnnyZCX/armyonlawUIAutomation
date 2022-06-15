@@ -18,9 +18,14 @@ from pages.usermanagementpage import UserManagement
 class TestCmsLog():
     @allure.story("后台日志按条件查询并验证查询结果")
     @allure.description('''
-        1.登
-        2.断言登录失败提示语句是否可见
-        3.输出测试通过或不通过日志
+        1.登录成功后校验全局配置菜单是否可见
+        2.在左侧导航栏中点击“全局配置>日志记录>后台日志”打开后台日志管理页面
+        3.输入操作用户“zhengchunxing”
+        4.打开一级模块下拉列表选择“全局管理”
+        5.打开二级模块下拉列表选择“问卷调查管理“
+        6.打开操作类型下拉列表选择”新增“
+        7.点击搜索按钮
+        8.在查询结果列表中校验操作类型栏文本值和操作内容栏文本值，并输出测试通过或不通过日志
         ''')
     def test_cms_log(self,page,login):
         userManagementPage = login
@@ -35,14 +40,6 @@ class TestCmsLog():
         try:
             # 操作用户输入
             cmsLogsPage.user_account_input.fill("zhengchunxing")
-            # 点击日历控件
-            #cmsLogsPage.date_icon.click()
-            # 选择今日日期作为开始日期
-            #cmsLogsPage.date_table_today.click()
-            # 选择一个结束日期
-            #cmsLogsPage.date_table_end_date.click()
-            # 点击日历控件上的确定按钮
-            #cmsLogsPage.date_table_confirm_button.click()
             # 打开一级模块选择下拉列表
             cmsLogsPage.top_level_module_input.click()
             # 选择全局管理一级模块

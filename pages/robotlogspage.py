@@ -26,3 +26,8 @@ class RobotLogs:
         # 搜索按钮
         self.search_button = self.page.locator("//button[@class=\"el-button el-button--primary el-button--medium index-module_search__Pf4J\"]")
 
+
+    def assertText(self,element,text_value):
+        text = self.page.inner_text(element)
+        assert text ==  text_value
+
