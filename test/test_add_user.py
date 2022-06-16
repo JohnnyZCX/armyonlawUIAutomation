@@ -40,6 +40,7 @@ class TestAddUser():
             addUserPage.local_configure_checkbox.click()
             addUserPage.save_button.click()
             # 等待跳转页面上提示保存成功
+            time.sleep(2)
             userManagementPage.save_success_alert.wait_for()
             test_log.info("新增用户测试通过")
         except Exception as e:
