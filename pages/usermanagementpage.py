@@ -14,6 +14,7 @@ class UserManagement:
         self.cms_log_menu = self.page.locator("//ul[@role=\"menu\"]/li[4]/ul[@role=\"menu\"]/li[3]") #后台日志菜单
         self.unit_manage_menu = self.page.locator("text=机构管理") #机构管理菜单
         self.sensitive_word_warning_menu = self.page.locator("text=敏感词预警") #敏感词预警菜单
+        self.feedback_manage_menu = self.page.locator("text=反馈管理") #反馈管理菜单
         self.questionnaire_manage_menu = self.page.locator("//*[@id=\"app\"]/section/div/section/aside/ul/li[1]/ul/li[3]") #问卷调查管理菜单
         self.switch_institution = self.page.locator("//*[@id=\"app\"]/section/header/div/div[2]/div[1]/div/div[1]/input")
         self.switch_institution_again = self.page.locator("//*[@id=\"app\"]/section/header/div/div[2]/div[1]/div/div/input")
