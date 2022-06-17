@@ -35,8 +35,8 @@ class TestAddUser():
             addUserPage.confirm_password_input.fill("123456")
             addUserPage.save_button.click()
             addUserPage.upload_photo_alert.wait_for()
-            addUserPage.upload_face_photo.set_input_files("9ad2494035d47606fb66dad565748c4f.jpeg")
-            addUserPage.upload_head_photo.set_input_files("d15a281faa877cfe73f4d1adfcaa7f35.jpeg")
+            addUserPage.upload_face_photo.set_input_files("Playwright/test/9ad2494035d47606fb66dad565748c4f.jpeg")
+            addUserPage.upload_head_photo.set_input_files("Playwright/test/d15a281faa877cfe73f4d1adfcaa7f35.jpeg")
             addUserPage.local_configure_checkbox.click()
             addUserPage.save_button.click()
             # 等待跳转页面上提示保存成功
