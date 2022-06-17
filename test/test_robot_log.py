@@ -39,8 +39,11 @@ class TestRobotLog():
             #robotLogsPage.start_date_input.fill("2022-05-20 00:00:00")
             #robotLogsPage.end_date_input.fill("2022-05-21 00:00:00")
             robotLogsPage.operation_type_drop_list.click()
+            #content_test = robotLogsPage.login_operation_type.inner_text()
+            #assert content_test == "登录"
             robotLogsPage.login_operation_type.click()
             robotLogsPage.search_button.click()
+
             time.sleep(1)
             robotLogsPage.assertText("//table[@class=\"el-table__body\"]/tbody/tr/td[5]/div","登录")
             robotLogsPage.assertText("//table[@class=\"el-table__body\"]/tbody/tr/td[2]/div","唐")

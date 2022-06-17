@@ -19,12 +19,8 @@ class SensitiveWordPage:
         self.date_icon = self.page.locator("//i[@class=\"el-input__icon el-range__icon el-icon-time\"]")
         # 日历部件中的开始日期输入框
         self.start_date_input = self.page.locator("//div[@class=\"el-picker-panel__body\"]//input[@placeholder=\"开始日期\"]")
-        # 日历部件中的开始时间输入框
-        self.start_time_inpput = self.page.locator("//div[@class=\"el-picker-panel__body\"]//input[@placeholder=\"开始时间\"]")
         # 日历部件中的结束日期输入框
         self.end_data_input = self.page.locator("//div[@class=\"el-picker-panel__body\"]//input[@placeholder=\"结束日期\"]")
-        # 日历部件中的结束时间输入框
-        self.end_time_input = self.page.locator("//div[@class=\"el-picker-panel__body\"]//input[@placeholder=\"结束时间\"]")
         # 日历部件底部确定按钮
         self.date_panel_confirm_button = self.page.locator("//div[@class=\"el-picker-panel__footer\"]/button[2]/span")
         # 机器人下拉箭头
