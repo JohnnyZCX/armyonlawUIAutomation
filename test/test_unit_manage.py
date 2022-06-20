@@ -5,6 +5,7 @@ import time
 import allure
 import pytest
 from playwright.async_api import Page
+from pytest_base_url.plugin import base_url
 
 from common.handle_logging import test_log
 from pages.loginpage import LoginPage
@@ -27,7 +28,7 @@ class TestUnitManage():
             ''')
     def test_unit_manage(self,page:Page):
         loginPage = LoginPage(page)
-        loginPage.login("superUserAdmin", "123789456")
+        loginPage.login(base_url,"superUserAdmin", "123789456")
         userManagementPage = UserManagement(page)
         userManagementPage.global_configuration.click()
         userManagementPage.assertVisible("text=机构管理")

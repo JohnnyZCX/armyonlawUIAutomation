@@ -3,7 +3,6 @@
 """
 import pytest
 from playwright.async_api import Page
-from pytest_base_url.plugin import base_url
 
 
 class LoginPage:
@@ -13,7 +12,7 @@ class LoginPage:
         self.user_account = self.page.locator("[placeholder=\"请输入账号\"]")
         self.login_button = self.page.locator("button:has-text(\"登录\")")
 
-    def login(self,userName,password):
+    def login(self,base_url,userName,password):
         # 页面窗口最大化
         self.page.set_viewport_size({"width": 1920, "height": 1080})
         #self.page.goto("https://t-rulearmylaw.aegis-info.com/login")

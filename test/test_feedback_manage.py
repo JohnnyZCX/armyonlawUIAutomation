@@ -80,7 +80,9 @@ class TestFeedbackManage():
         except Exception as e:
             allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
             test_log.error('查看反馈详情测试不通过')
+            test_log.debug('预期结果：反馈详情的数据应该与反馈记录列表中的一致')
             test_log.exception(e)
+            pytest.fail("预期结果：反馈详情的数据应该与反馈记录列表中的一致")
 
 
 
