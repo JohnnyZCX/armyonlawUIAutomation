@@ -26,10 +26,8 @@ class TestUnitManage():
             7.在机构列表中点击“机构管理”按钮，后校验编辑机构弹窗是否可见
             8.在弹窗中点击确定按钮并校验修改并更新机构成功提示语是否可见
             ''')
-    def test_unit_manage(self,page:Page):
-        loginPage = LoginPage(page)
-        loginPage.login(base_url,"superUserAdmin", "123789456")
-        userManagementPage = UserManagement(page)
+    def test_unit_manage(self,page:Page,superUserAmdin_login):
+        userManagementPage = superUserAmdin_login
         userManagementPage.global_configuration.click()
         userManagementPage.assertVisible("text=机构管理")
         userManagementPage.switch_institution.click()

@@ -26,7 +26,7 @@ ids = ['user_login']
 @pytest.fixture(params=data, ids=ids)
 def login(page: Page, request):
     loginPage = LoginPage(page)
-    loginPage.login(base_url,request.param['userName'], request.param['password'])
+    loginPage.login(request.param['userName'], request.param['password'])
     userManagementPage = UserManagement(page)
     yield userManagementPage
     userManagementPage.logout_button.click()
@@ -38,7 +38,18 @@ def login(page: Page, request):
 @pytest.fixture()
 def login_hospital(page: Page):
     loginPage = LoginPage(page)
-    loginPage.login(base_url,"DoctorZheng", "123456")
+    loginPage.login("DoctorZheng", "123456")
+    userManagementPage = UserManagement(page)
+    yield userManagementPage
+    userManagementPage.logout_button.click()
+    userManagementPage.logout_confirm_button.click()
+    loginPage.page.context.close()
+    loginPage.page.close()
+
+@pytest.fixture()
+def superUserAmdin_login(page):
+    loginPage = LoginPage(page)
+    loginPage.login("superUserAdmin", "123789456")
     userManagementPage = UserManagement(page)
     yield userManagementPage
     userManagementPage.logout_button.click()

@@ -26,7 +26,7 @@ class TestLogin():
     def test_login_fail(self,page:Page):
         loginPage = LoginPage(page)
         try:
-            loginPage.login(base_url,"zhengchunxing_11", "123456")
+            loginPage.login("zhengchunxing_11", "123456")
             time.sleep(2)
             loginPage.assertVisible('text=登录失败，账户名或密码错误')
             test_log.info("登录失败测试通过")
@@ -48,7 +48,7 @@ class TestLogin():
         loginPage = LoginPage(page)
         try:
             #loginPage.login("zhengchunxing","axing_2010")
-            loginPage.login(base_url,"zhengchunxing", "axing_2010")
+            loginPage.login("zhengchunxing", "axing_2010")
             userManagementPage = UserManagement(page)
             # 等待是否跳转成功
             userManagementPage.global_configuration.wait_for()
