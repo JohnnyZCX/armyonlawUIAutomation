@@ -22,6 +22,9 @@ class EquipmentManage:
         # 列表中第一行机器人的编号值  //table[@class="el-table__body"]//tr[1]/td[2]/div,20220621201
         # 列表中第一行机器人的名称值 //table[@class="el-table__body"]//tr[1]/td[3]/div,修改已有的机器人
         # 列表中查询无数据的文本校验 //span[@class="el-table__empty-text"],暂无数据
+        # 列表中操作栏下第一行的页面配置按钮
+        self.first_row_page_config_button = self.page.locator("//tbody/tr/td[5]//button[2]")
+
 
     def assertText(self,element,text_value):
         text = self.page.inner_text(element)
