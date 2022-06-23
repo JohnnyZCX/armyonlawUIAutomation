@@ -35,7 +35,7 @@ class TestRobotLog():
         robotLogsPage = RobotLogs(page)
         robotLogsPage.date_icon.wait_for()
         try:
-            robotLogsPage.user_input.fill("唐")
+            robotLogsPage.user_input.fill("汤")
             #robotLogsPage.start_date_input.fill("2022-05-20 00:00:00")
             #robotLogsPage.end_date_input.fill("2022-05-21 00:00:00")
             robotLogsPage.operation_type_drop_list.click()
@@ -46,7 +46,7 @@ class TestRobotLog():
 
             time.sleep(1)
             robotLogsPage.assertText("//table[@class=\"el-table__body\"]/tbody/tr/td[5]/div","登录")
-            robotLogsPage.assertText("//table[@class=\"el-table__body\"]/tbody/tr/td[2]/div","唐")
+            robotLogsPage.assertText("//table[@class=\"el-table__body\"]/tbody/tr/td[2]/div","汤")
             test_log.info("机器人日志查询测试通过")
         except Exception as e:
             allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
