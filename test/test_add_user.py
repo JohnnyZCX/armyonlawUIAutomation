@@ -38,9 +38,10 @@ class TestAddUser():
             addUserPage.upload_face_photo.set_input_files("test\\9ad2494035d47606fb66dad565748c4f.jpeg")
             addUserPage.upload_head_photo.set_input_files("test\\d15a281faa877cfe73f4d1adfcaa7f35.jpeg")
             addUserPage.local_configure_checkbox.click()
+            time.sleep(2)
             addUserPage.save_button.click()
             # 等待跳转页面上提示保存成功
-            time.sleep(0.5)
+            time.sleep(1)
             userManagementPage.save_success_alert.wait_for()
             test_log.info("新增用户测试通过")
         except Exception as e:
@@ -64,7 +65,9 @@ class TestAddUser():
         try:
             userManagementPage.account_input.fill("zhangtiandi")
             userManagementPage.search_button.click()
+            time.sleep(1)
             userManagementPage.delete_account_button.click()
+            time.sleep(1)
             userManagementPage.delete_confirm_button.click()
             time.sleep(2)
             userManagementPage.assertVisible("text=删除成功")

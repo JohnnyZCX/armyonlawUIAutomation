@@ -23,6 +23,11 @@ class RobotPageConfig:
         self.headline_config_tab_input = self.page.locator("//span[text()=\"大标题配置\"]/ancestor::div[@class=\"index-module_header_2PLLL\"]/following-sibling::div[@class=\"index-module_container_Uuzng\"]//input")
         # 热门问题配置tab
         self.popular_questions_config_tab = self.page.locator("//div[@role=\"tablist\"]/div[text()=\"热门问题配置\"]")
+        # 热门问题配置tab中输入框
+        self.popular_questions_config_tab_input = self.page.locator("//span[text()=\"热门问题配置\"]/ancestor::div[@class=\"index-module_header_2PLLL\"]/following-sibling::div[@class=\"index-module_container_Uuzng\"]//input")
+        # 热门问题列表（共8个问题）
+        i = random.randint(1,8)
+        self.question_list_input = self.page.locator("//div[@id=\"pane-4\"]//div[@class=\"index-module_hotQuestion_3NWML\"]//li[%d]" % i)
         # 功能模块配置tab
         self.function_module_config_tab = self.page.locator("//div[@role=\"tablist\"]/div[text()=\"功能模块配置\"]")
         # 小机器人形象配置tab
@@ -48,6 +53,7 @@ class RobotPageConfig:
         self.big_screen_config_third_delete_button = self.page.locator("//div[@class=\"swiper-wrapper\"]/div[@class=\"swiper-slide\"]/img/following-sibling::span[@class=\"index-module_deleteIcon_37FBd\"]")
         # 是否确认删除提示框中确定按钮
         self.delete_image_dialog_confirm_button = self.page.locator("//div[@class=\"deleteWarning\"][text()=\"是否确认删除？\"]/ancestor::div[@class=\"el-dialog__body\"]/following-sibling::div[@class=\"el-dialog__footer\"]//button[1]")
+
 
 
 

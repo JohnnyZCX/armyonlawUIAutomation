@@ -156,6 +156,40 @@ class TestRobotPageConfig:
             test_log.exception(e)
             pytest.fail("预期结果：修改大标题文本内容并提交同步测试通过")
 
+    @allure.story("机器人热门问题配置测试")
+    def test_popular_question_config(self,page,superUserAmdin_login):
+        userManagementPage = superUserAmdin_login
+        userManagementPage.equipment_manage_menu.click()
+        equipmentManagePage = EquipmentManage(page)
+        equipmentManagePage.robot_number_input.wait_for()
+        equipmentManagePage.robot_number_input.fill("D4A0D010020534M1D5")
+        equipmentManagePage.search_button.click()
+        time.sleep(1)
+        equipmentManagePage.first_row_page_config_button.click()
+        try:
+            time.sleep(2)
+            robotPageConfig = RobotPageConfig(page)
+            robotPageConfig.background_config_tab.wait_for()
+            robotPageConfig.popular_questions_config_tab.click()
+            time.sleep(1)
+            robotPageConfig.question_list_input.click()
+            robotPageConfig.popular_questions_config_tab_input.fill(robotPageConfig.GBK2312()+robotPageConfig.GBK2312()+robotPageConfig.GBK2312()+robotPageConfig.GBK2312()+robotPageConfig.GBK2312()+robotPageConfig.GBK2312()+robotPageConfig.GBK2312())
+            robotPageConfig.page.locator("//span[text()=\"热门问题配置\"]").click()
+            robotPageConfig.commit_sync_button.click()
+            time.sleep(1)
+            robotPageConfig.assertText("//div[@role=\"progressbar\"]/preceding-sibling::div[@class=\"deleteWarning\"]","机器人配置提交同步成功")
+            robotPageConfig.commit_success_confirm_button.click()
+            test_log.info("机器人热门问题配置测试通过")
+        except Exception as e:
+            allure.attach(page.screenshot(), "用例失败截图", allure.attachment_type.PNG)
+            test_log.error('机器人热门问题配置测试不通过')
+            test_log.debug('预期结果：修改热门问题文本内容并提交同步测试通过')
+            test_log.exception(e)
+            pytest.fail("预期结果：修改热门问题文本内容并提交同步测试通过")
+
+
+
+
 
 
 
