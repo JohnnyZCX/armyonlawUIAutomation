@@ -1,6 +1,8 @@
 """
 管理后台登录页
 """
+import time
+
 import pytest
 from playwright.async_api import Page
 from pytest_base_url.plugin import base_url
@@ -17,7 +19,9 @@ class LoginPage:
         # 页面窗口最大化
         self.page.set_viewport_size({"width": 1920, "height": 1080})
         #self.page.goto("https://t-rulearmylaw.aegis-info.com/login")
-        self.page.goto("https://t-rulearmylaw.aegis-info.com/login")
+        time.sleep(1.5)
+        self.page.goto("https://t-rulearmylaw.aegis-info.com/")
+        time.sleep(1)
         visible = self.page.is_visible('[placeholder=\"请输入密码\"]')
         assert visible
         self.password_input.fill(password)

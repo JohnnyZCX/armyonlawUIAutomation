@@ -86,6 +86,7 @@ class TestQuesitionnaireInvestigate():
         addQuestionnairePage.dialog_confirm_button.click()
 
         addQuestionnairePage.save_as_template_button.click()
+        time.sleep(2)
         questionnaireListPage.title_search_input.fill("擎盾大学问卷（一）")
         questionnaireListPage.search_button.click()
 
@@ -167,6 +168,7 @@ class TestQuesitionnaireInvestigate():
             time.sleep(2)
             questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom data\"]/div/div[2]").hover(timeout=3000,force=True)
             questionnaireListPage.page.locator("//div[@class=\"questionnaire-item\"][2]/div[@class=\"questionnaire-bottom\"]//p[4]").click()
+            time.sleep(1)
             questionnaireListPage.dialog_confirm_button.click()
             questionnaireListPage.operate_success_alert.wait_for()
             test_log.info('问卷删除测试通过')
